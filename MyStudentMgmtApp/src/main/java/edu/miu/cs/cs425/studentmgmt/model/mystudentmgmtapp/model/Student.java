@@ -5,6 +5,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="students")
@@ -32,6 +34,16 @@ public class Student {
     @Column(nullable = true)
     private double cgpa;
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private Set<Transcript> transcripts = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(
+            name="student_classroom",
+            joinColumns=@JoinColumn(name="student_id"),
+            inverseJoinColumns=@JoinColumn(name="classroom_id"))
+    private Classroom classroom;
+
     private LocalDate dateOfEnrollment;
 
     public Student() {
@@ -44,6 +56,54 @@ public class Student {
         this.lastName = lastName;
         this.cgpa = cgpa;
         this.dateOfEnrollment = dateOfEnrollment;
+    }
+
+    public Student(String studentNumber, String firstName, String middleName, String lastName, double cgpa, Set<Transcript> transcripts, LocalDate dateOfEnrollment) {
+        this.studentNumber = studentNumber;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.cgpa = cgpa;
+        this.transcripts = transcripts;
+        this.dateOfEnrollment = dateOfEnrollment;
+    }
+
+    public Student(String studentNumber, String firstName, String middleName, String lastName, double cgpa, Set<Transcript> transcripts, Classroom classroom, LocalDate dateOfEnrollment) {
+        this.studentNumber = studentNumber;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.cgpa = cgpa;
+        this.transcripts = transcripts;
+        this.classroom = classroom;
+        this.dateOfEnrollment = dateOfEnrollment;
+    }
+
+    public String getStudentNumber() {
+        return studentNumber;
+    }
+
+    public void setStudentNumber(String studentNumber) {
+        this.studentNumber = studentNumber;
+    }
+
+    public Set<Transcript> getTranscripts() {
+        return transcripts;
+    }
+
+    public void setTranscripts(Set<Transcript> transcripts) {
+        this.transcripts = transcripts;
+    }
+
+    public  void addTranscript(Transcript transcript) {
+        this.transcripts.add(transcript);
+    }
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
     }
 
     public Long getStudentId() {
