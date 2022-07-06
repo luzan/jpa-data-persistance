@@ -16,12 +16,20 @@ public class Transcript {
     @NotNull(message = "Degree Title cannot be null!")
     private String degreeTitle;
 
+    @ManyToOne
+    @JoinColumn(name = "studentId")
+    private Student student;
+
+    public Transcript() {
+        this(null);
+    }
     public Transcript(String degreeTitle) {
         this.degreeTitle = degreeTitle;
     }
 
-    public Transcript() {
-        this(null);
+    public Transcript(String degreeTitle, Student student) {
+        this.degreeTitle = degreeTitle;
+        this.student = student;
     }
 
     public Long getTranscriptId() {
@@ -38,6 +46,14 @@ public class Transcript {
 
     public void setDegreeTitle(String degreeTitle) {
         this.degreeTitle = degreeTitle;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     @Override
