@@ -1,6 +1,10 @@
+## Lab 9 - Implementing Data Persistence using ORM/JPA/SpringData JPA
+
+### Student Management CLI App
+
 In this assignment, do the following:
 
-Task 1:
+### Task 1:
 
 Implement simple Data Persistence with JPA.
 
@@ -30,7 +34,7 @@ object using the following data and invokes the saveStudent() method to save it 
 Student data: s1: { studentId:1, studentNumber: 000-61-0001, firstName:Anna, middleName: Lynn, 
 LastName: Smith, cgpa:3.45, dateOfEnrollment:2019/5/24 }
 
-Task 2:
+## Task 2:
 
 1. Add a new entity named, Transcript (transcriptId: primaryKey, degreeTitle) to your solution above. 
 Determine the relationship between Student entity and Transcript enity. And then implement JPA code 
