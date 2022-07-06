@@ -1,21 +1,33 @@
 package edu.miu.cs.cs425.studentmgmt.model.mystudentmgmtapp.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
+@Table(name="students")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentId;
-
     @Column(nullable = false)
+    @NotNull(message="Student Number cannot be null!")
+    @NotEmpty(message="Student Number cannot be empty!")
+    @NotBlank(message="Student Number cannot be blank spaces!")
     private String studentNumber;
     @Column(nullable = false)
+    @NotNull(message="First name cannot be null!")
+    @NotEmpty(message="First name cannot be empty!")
+    @NotBlank(message="First name cannot be blank spaces!")
     private String firstName;
     @Column(nullable = true)
     private String middleName;
     @Column(nullable = false)
+    @NotNull(message="Last name cannot be null!")
+    @NotEmpty(message="Last name cannot be empty!")
+    @NotBlank(message="Last name cannot be blank spaces!")
     private String lastName;
     @Column(nullable = true)
     private double cgpa;
